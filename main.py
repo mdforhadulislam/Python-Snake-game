@@ -1,8 +1,7 @@
 import pygame
+import random
 
 pygame.init()
-
-import random
 
 # using colors defind
 white = (255, 255, 255)
@@ -10,8 +9,8 @@ red = (255, 0, 0)
 black = (0, 0, 0)
 
 # defind windrow or game output display
-WIDTH = 800
-HEIGHT = 500
+WIDTH = 900
+HEIGHT = 600
 game_windrow = pygame.display.set_mode((WIDTH, HEIGHT))
 
 # game windrow Title
@@ -51,8 +50,8 @@ def game_loop():
     while not exit_game:
         if game_over:
             game_windrow.fill(black)
-            scroe_text_screen("Your Score: "+str(score), red,(WIDTH/2)-90, 150)
-            scroe_text_screen("Game Is Over! Press Enter To continue", red,120,250)
+            scroe_text_screen("Your Score: "+str(score), red, (WIDTH/2)-100, 150)
+            scroe_text_screen("Game Is Over! Press Enter To continue", red, 150, 250)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     exit_game = True
@@ -94,6 +93,10 @@ def game_loop():
             snake_list.append(head)
             if len(snake_list) > snake_len:
                 del snake_list[0]
+
+            if head in snake_list[:-1]:
+                game_over = True
+
             if snake_x < 0 or snake_x > WIDTH or snake_y < 0 or snake_y > HEIGHT:
                 game_over = True
 
@@ -106,7 +109,6 @@ def game_loop():
     # quit the program file
     pygame.quit()
     quit()
-
 
 
 game_loop()
