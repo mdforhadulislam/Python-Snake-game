@@ -48,11 +48,17 @@ def game_loop():
     snake_list = []
     snake_len = 1
 
-    with open("hi score.txt","r") as f:
+    if (not os.path.exists("high Score.txt")):
+        with open("high score.txt","w") as f:
+            f.write("0")
+
+    with open("high score.txt","r") as f:
         hiscore = f.read()
 
     while not exit_game:
         if game_over:
+            with open("high score.txt","w") as f:
+                f.write(str(hiscore))
             game_windrow.fill(black)
             scroe_text_screen("Your Score: "+str(score), red, (WIDTH/2)-110, 150)
             scroe_text_screen("Game Is Over! Press Enter To continue", red, 150, 250)
