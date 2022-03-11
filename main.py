@@ -1,5 +1,6 @@
 import pygame
 import random
+import os
 
 pygame.init()
 
@@ -47,10 +48,13 @@ def game_loop():
     snake_list = []
     snake_len = 1
 
+    with open("hi score.txt","r") as f:
+        hiscore = f.read()
+
     while not exit_game:
         if game_over:
             game_windrow.fill(black)
-            scroe_text_screen("Your Score: "+str(score), red, (WIDTH/2)-100, 150)
+            scroe_text_screen("Your Score: "+str(score), red, (WIDTH/2)-110, 150)
             scroe_text_screen("Game Is Over! Press Enter To continue", red, 150, 250)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -85,7 +89,11 @@ def game_loop():
                 food_y = random.randint(0, HEIGHT / 2)
                 snake_len += 3
             game_windrow.fill(white)
-            scroe_text_screen('Scroe: ' + str(score), red, 5, 5)
+
+            if score > int(hiscore):
+                hiscore = score
+
+            scroe_text_screen('Scroe: ' + str(score)+" "+ " High Score "+str(hiscore), red, 5, 5)
             pygame.draw.rect(game_windrow, black, [snake_x, snake_y, snake_size, snake_size])
             head = []
             head.append(snake_x)
