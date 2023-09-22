@@ -60,7 +60,7 @@ def game_loop():
             with open("high score.txt","w") as f:
                 f.write(str(hiscore))
             game_windrow.fill(black)
-            scroe_text_screen("Your Score: "+str(score), red, (WIDTH/2)-110, 150)
+            scroe_text_screen(f"Your Score: {str(score)}", red, (WIDTH/2)-110, 150)
             scroe_text_screen("Game Is Over! Press Enter To continue", red, 150, 250)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -99,7 +99,7 @@ def game_loop():
             if score > int(hiscore):
                 hiscore = score
 
-            scroe_text_screen('Scroe: ' + str(score)+" "+ " High Score "+str(hiscore), red, 5, 5)
+            scroe_text_screen(f'Scroe: {str(score)}  High Score {str(hiscore)}', red, 5, 5)
             pygame.draw.rect(game_windrow, black, [snake_x, snake_y, snake_size, snake_size])
             head = []
             head.append(snake_x)
